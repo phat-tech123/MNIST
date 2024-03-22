@@ -108,23 +108,29 @@ public:
     }
     void remove() {
         if (this->current == this->pList->head && this->current == this->pList->tail) {
+            Node<T>* tmp = this->pList->head;
             this->pList->head = NULL;
             this->pList->tail = NULL;
             this->index = -1;
             this->current = NULL;
+            delete tmp;
             this->pList->count--;
         }
         else if (this->current == this->pList->head) {
+            Node<T>* tmp = this->pList->head;
             this->pList->head = this->pList->head->next;
             this->current = this->pList->head->previous;
+            delete tmp;
             this->index = -1;
             this->pList->count--;
         }
         else if (this->current == this->pList->tail) {
+            Node<T>* tmp = this->pList->tail;
             this->pList->tail = this->pList->tail->previous;
             this->index = -1;
-            delete this->current;
             this->current = this->pList->tail;
+            this->current->next = NULL;
+            delete tmp;
             this->pList->count--;
         }
         else {
